@@ -1,0 +1,224 @@
+ndisc6 (1.0.4-2) unstable; urgency=medium
+
+  * Make build reprodicible by dropping configure arguments from help texts.
+    Thanks to Chris Lamb (Closes: #953071)
+  * rdnssd.postrm: Fix wrong redirection order (Closes: #908259)
+  * d/control: Add ${misc:Pre-Depends}, drop obsolete Conflicts
+
+  [ Debian Janitor ]
+  * Trim trailing whitespace.
+  * Use secure URI in Homepage field.
+  * Bump debhelper from old 11 to 12.
+  * Set debhelper-compat version in Build-Depends.
+  * Replace /var/run with /run for the Service PIDFile.
+  * Set upstream metadata fields: Name (from ./configure), Repository.
+  * Replace XC-Package-Type with Package-Type.
+
+ -- Bernhard Schmidt <berni@debian.org>  Fri, 11 Dec 2020 10:32:44 +0100
+
+ndisc6 (1.0.4-1) unstable; urgency=medium
+
+  [ Ondřej Nový ]
+  * d/control: Set Vcs-* to salsa.debian.org
+
+  [ Bernhard Schmidt ]
+  * New upstream version 1.0.4
+  * Drop dnssd-hook-drop-dnssl.patch applied upstream
+  * Switch to debhelper 11, bump SV (no changes needed)
+
+ -- Bernhard Schmidt <berni@debian.org>  Sun, 13 Jan 2019 21:41:06 +0100
+
+ndisc6 (1.0.3-3) unstable; urgency=medium
+
+  * Import upstream fix to simplify rdnssd-merge-hook (Closes: #853281)
+
+ -- Bernhard Schmidt <berni@debian.org>  Wed, 01 Feb 2017 11:00:55 +0100
+
+ndisc6 (1.0.3-2) unstable; urgency=medium
+
+  [ Bernhard Schmidt ]
+  * Mostly use upstream rdnssd-hook to merge resolv.conf (Closes: #767071)
+
+ -- Bernhard Schmidt <berni@debian.org>  Sun, 01 Jan 2017 20:33:46 +0100
+
+ndisc6 (1.0.3-1) unstable; urgency=medium
+
+  * Adopt package (Closes: #713004)
+    - Switch to dh9, enable all hardening
+    - Add Vcs-* fields
+    - bump standards to 3.9.8, no changes necessary
+  * New upstream version 1.0.3
+    - Closes: #599870, #605808, #627777, #658254
+  * Refresh patches
+  * drop perl dependency of rdnssd, the hook is now a shell script
+  * fix lsb-base dependency on rdnssd
+
+ -- Bernhard Schmidt <berni@debian.org>  Fri, 14 Oct 2016 09:06:41 +0200
+
+ndisc6 (1.0.1-6) unstable; urgency=medium
+
+  * QA upload.
+  * Drop build-depends on libnss-files-udeb, they're now provided by
+    libc-udeb, as of glibc 2.22-5.
+
+ -- Aurelien Jarno <aurel32@debian.org>  Thu, 31 Mar 2016 20:10:33 +0200
+
+ndisc6 (1.0.1-5) unstable; urgency=medium
+
+  * QA upload.
+  * Add debian/rdnssd.service (Closes: #796630)
+  * Add dh-systemd to build-dependencies to have cdbs pick it up.
+  * Drop dead/obsolete XS-Vcs-Svn url from debian/control.
+
+ -- Andreas Henriksson <andreas@fatal.se>  Tue, 22 Dec 2015 17:30:17 +0100
+
+ndisc6 (1.0.1-4) unstable; urgency=medium
+
+  * QA upload.
+  * Refresh debian/patches/02-we-will-do-fine-without-build-date-or-build-host.
+    The __DATE__ was still being used in rdnssd/rdnssd.c.
+
+ -- Santiago Vila <sanvila@debian.org>  Mon, 14 Sep 2015 14:00:02 +0200
+
+ndisc6 (1.0.1-3) unstable; urgency=medium
+
+  * QA upload.
+  * Switch to "3.0 (quilt)" source format.
+  * Put old .diff.gz in debian/patches/01-debian-patch-in-version-1.0.1-2.
+  * Neither the build date or the build host should be relevant.
+    Add debian/patches/02-we-will-do-fine-without-build-date-or-build-host.
+
+ -- Santiago Vila <sanvila@debian.org>  Sat, 29 Aug 2015 18:49:00 +0200
+
+ndisc6 (1.0.1-2) unstable; urgency=medium
+
+  * QA upload.
+  * Set maintainer to the Debian QA Group (see #713004).
+  * Add conflicts between rdnssd and network-manager (closes: #740998).
+
+ -- Michael Gilbert <mgilbert@debian.org>  Sat, 14 Feb 2015 01:16:37 +0000
+
+ndisc6 (1.0.1-1) unstable; urgency=low
+
+  * New upstream release:
+    - translate into German (Closes: #579719).
+    - fix alignment issues on ARM and SPARC (Closes: #599869).
+  * Update my email address.
+  * Refer to GPL-2 rather than just GPL.
+  * Update to standards version 3.9.1.
+  * Add udeb for rdisc6 and rdnssd (Closes: #611330)
+    (patch by Matthew Palmer <mpalmer@debian.org>).
+  * Stop rdnssd also on run level 1.
+
+ -- Rémi Denis-Courmont <remi@remlab.net>  Sun, 20 Feb 2011 10:18:42 +0200
+
+ndisc6 (0.9.8-1) unstable; urgency=low
+
+  * New upstream version fixes rdisc6 ISATAP interfaces support.
+  * Switch to debhelper v7.
+  * Fill in initscript Provides.
+  * Update to standards version 3.8.0.
+
+ -- Rémi Denis-Courmont <rdenis@simphalempin.com>  Sat, 16 Aug 2008 16:33:47 +0300
+
+ndisc6 (0.9.7-1) unstable; urgency=medium
+
+  * New upstream release:
+   - fixes compilation against newer kernel headers (Closes: #464261).
+  * Update debian/copyright statements.
+  * Remove linda overrides.
+  * Move rdisc6 to /bin as some folks use it to initialize their network.
+  * Make rdnssd.init LSB comments consistent with update-rc.d invocation.
+  * Start rdnssd before networking also when using insserv.
+  * Replace upstream merge-hook with a custom one:
+    - do not use Perl (as /usr is not available early enough),
+    - use resolvconf for merging (Closes: #470842).
+  * Recommend resolvconf.
+
+ -- Rémi Denis-Courmont <rdenis@simphalempin.com>  Sun, 16 Mar 2008 18:58:52 +0200
+
+ndisc6 (0.9.5-1) unstable; urgency=low
+
+  * New upstream release.
+  * Add rdnssd as a binary package of its own.
+  * Added Homepage to debian/control.
+  * Update to standards version 3.7.3.
+
+ -- Rémi Denis-Courmont <rdenis@simphalempin.com>  Sun, 30 Dec 2007 17:50:25 +0100
+
+ndisc6 (0.9.3-1) unstable; urgency=low
+
+  * New upstream version.
+  * Explicitly disable run-time assertions and debug code.
+  * nameinfo and addrinfo renamed upstream, brought back.
+  * Add tcpspray as tcpspray.ndisc6, pending alternative use.
+  * Update upstream URL.
+  * Add gettext and autotools-dev to Build-Deps because of gettext.
+  * Update standards version to 3.7.2.2.
+  * Make rltraceroute6 an alternative for traceroute6
+    and conflict with pre-alternative iputils-tracepath
+  * Added XS-Vcs-Svn field.
+
+ -- Rémi Denis-Courmont <rdenis@simphalempin.com>  Wed, 08 Aug 2007 18:18:00 +0300
+
+ndisc6 (0.7.3-2) unstable; urgency=medium
+
+  * Remove conflicting addrinfo from package (Closes: #404007).
+  * Remove nameinfo too as it depends upon addrinfo.
+  * Fix IPV6_PKTINFO detection (from upstream [364]).
+  * Fix traceroute6 -F (from upstream [366]).
+  * Fix traceroute6 temporary DNS error handling (from upstream [388]).
+  * Fix tcpspray echo fatal error deadlock (from upstream [418]).
+
+ -- Rémi Denis-Courmont <rdenis@simphalempin.com>  Thu, 21 Dec 2006 09:14:15 +0100
+
+ndisc6 (0.7.3-1) unstable; urgency=low
+
+  * New upstream release (adds IDN, fix traceroute6, fix Hurd support).
+  * Use ld --as-needed to avoid superfluous librt linking.
+
+ -- Rémi Denis-Courmont <rdenis@simphalempin.com>  Sun, 08 Oct 2006 20:21:18 +0300
+
+ndisc6 (0.7.2-1) unstable; urgency=low
+
+  * New upstream version adds dnssort, nameinfo and addrinfo,
+  * Make ndisc6, rltraceroute6, rdisc6 setuid,
+    upstream has added protection against local root compromise,
+  * Remove bogus define of IPV6_RECVHOPLIMIT,
+  * Remove IPV6_TCLASS define merged upstream.
+
+ -- Rémi Denis-Courmont <rdenis@simphalempin.com>  Tue, 12 Sep 2006 22:49:31 +0300
+
+ndisc6 (0.6.8-1) unstable; urgency=low
+
+  * New upstream version, fix tcpspray6 measurements.
+  * Supplement missing IPV6_TCLASS and IPV6_RECVHOPLIMIT from glibc manually.
+
+ -- Rémi Denis-Courmont <rdenis@simphalempin.com>  Fri,  1 Sep 2006 20:41:57 +0300
+
+ndisc6 (0.6.7-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- Rémi Denis-Courmont <rdenis@simphalempin.com>  Sat, 12 Aug 2006 23:42:40 +0300
+
+ndisc6 (0.6.6-1) unstable; urgency=low
+
+  * New upstream release.
+  * Fixed watch file.
+  * Initial release (Closes: #380654 -- ITP for ndisc6).
+
+ -- Rémi Denis-Courmont <rdenis@simphalempin.com>  Sat, 15 Jul 2006 13:41:06 +0300
+
+ndisc6 (0.6.5-0remlab) unstable; urgency=low
+
+  * New upstream release.
+  * Switch to CDBS.
+
+ -- Rémi Denis-Courmont <rdenis@simphalempin.com>  Fri,  7 Jul 2006 18:06:23 +0300
+
+ndisc6 (0.6.4-0remlab) unstable; urgency=low
+
+  * Initial internal release.
+
+ -- Rémi Denis-Courmont <rdenis@simphalempin.com>  Sat,  3 Jun 2006 21:09:54 +0300

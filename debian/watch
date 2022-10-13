@@ -1,0 +1,6 @@
+# Compulsory line, this is a version 3 file
+version=3
+
+# <Webpage URL> <string match>
+http://www.remlab.net/files/ndisc6/archive/ ndisc6-(.*).tar.bz2
+

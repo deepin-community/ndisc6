@@ -1,0 +1,21 @@
+[Unit]
+Description=IPv6 Recursive DNS Server discovery Daemon
+Documentation=man:rdnssd(8)
+Before=network.target
+Requires=network.target
+
+[Service]
+# Note: -u user (default:nobody) only applies to worker process,
+#        manager (executing merge-hook) still runs as root.
+Environment=MERGE_HOOK=/bin/true "OPTIONS=-u rdnssd"
+EnvironmentFile=-/etc/default/rdnssd
+Type=forking
+ExecStartPre=/bin/mkdir -p /var/run/rdnssd
+ExecStartPre=/bin/chown rdnssd:nogroup /var/run/rdnssd
+ExecStartPre=/bin/chmod 0755 /var/run/rdnssd
+ExecStart=/sbin/rdnssd $OPTIONS -H $MERGE_HOOK
+PIDFile=/run/rdnssd.pid
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

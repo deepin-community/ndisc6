@@ -1,0 +1,27 @@
+From: Santiago Vila <sanvila@debian.org>
+Subject: This is the diff from version 1.0.1-2, converted to quilt patch
+
+--- a/rdnss/merge-hook.in
++++ b/rdnss/merge-hook.in
+@@ -1,6 +1,6 @@
+ #! /bin/sh
+ #
+-# resolv.conf merge hook for rdnssd
++# resolv.conf merge hook for Debian rdnssd
+ 
+ # *************************************************************************
+ # *  Copyright © 2007-2009, 2017 Pierre Ynard.                            *
+@@ -19,7 +19,12 @@
+ 
+ set -e
+ 
+-PATH=/sbin:/bin
++# Debian modification, use resolvconf if available
++INPUT="/var/run/rdnssd/resolv.conf"
++if [ -x /sbin/resolvconf ]; then
++       /sbin/resolvconf -a 000.rdnssd < "$INPUT"
++       exit 0
++fi
+ 
+ # Max number of nameserver options taken into account. Should be as
+ # defined in <resolv.h>

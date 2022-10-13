@@ -1,0 +1,3 @@
+etc/rdnssd/*
+sbin/rdnssd
+usr/share/man/man8/rdnssd.8

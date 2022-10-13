@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+  purge)
+    userdel rdnssd >/dev/null 2>&1 || true
+    rm -f -- /var/run/rdnssd/resolv.conf 2>/dev/null
+    rmdir -- /var/run/rdnssd/ || true
+  ;;
+esac
+
+#DEBHELPER#
+

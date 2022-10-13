@@ -1,0 +1,29 @@
+#!/usr/bin/make -f
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+export DEB_LDFLAGS_MAINT_APPEND = -Wl,-z,defs -Wl,--as-needed
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	dh_auto_configure -- \
+	'--program-transform-name=/^tcpspray$$/s/$$/.ndisc6/' \
+	--disable-assert
+
+override_dh_install:
+	mkdir -p debian/tmp/bin debian/tmp/sbin
+	mv debian/tmp/usr/bin/rdisc6 debian/tmp/bin/
+	mv debian/tmp/usr/sbin/rdnssd debian/tmp/sbin/
+	for b in usr/bin/ndisc6 bin/rdisc6 usr/bin/rltraceroute6; do \
+		chmod u+s debian/tmp/$$b || exit $$?; \
+	done
+	dh_install
+
+
+override_dh_fixperms:
+	dh_fixperms -Xusr/bin/ndisc6 -Xbin/rdisc6 -Xusr/bin/rltraceroute6
+
+# Start before networking, stop at the same time as DHCP
+override_dh_installinit:
+	dh_installinit -prdnssd -- "start 38 S . stop 16 0 6 ."

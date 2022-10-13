@@ -1,0 +1,59 @@
+From: Santiago Vila <sanvila@debian.org>
+Subject: We should not really care about the build date or the build host
+
+--- a/src/addrinfo.c
++++ b/src/addrinfo.c
+@@ -148,8 +148,6 @@
+ static int version (void)
+ {
+         printf (_("addrinfo %s (%s)\n"), VERSION, "$Rev$");
+-	printf (_(" built %s on %s\n"), __DATE__, PACKAGE_BUILD_HOSTNAME);
+-        printf (_("Configured with: %s\n"), PACKAGE_CONFIGURE_INVOCATION);
+         puts (_("Written by Remi Denis-Courmont\n"));
+ 
+         printf (_("Copyright (C) %u-%u Remi Denis-Courmont\n"), 2002, 2007);
+--- a/src/ndisc.c
++++ b/src/ndisc.c
+@@ -887,9 +887,7 @@
+ {
+ 	printf (_(
+ "ndisc6: IPv6 Neighbor/Router Discovery userland tool %s (%s)\n"), VERSION, "$Rev$");
+-	printf (_(" built %s on %s\n"), __DATE__, PACKAGE_BUILD_HOSTNAME);
+ 
+-	printf (_("Configured with: %s\n"), PACKAGE_CONFIGURE_INVOCATION);
+ 	puts (_("Written by Remi Denis-Courmont\n"));
+ 
+ 	printf (_("Copyright (C) %u-%u Remi Denis-Courmont\n"), 2004, 2007);
+--- a/src/tcpspray.c
++++ b/src/tcpspray.c
+@@ -302,8 +302,6 @@
+ {
+ 	printf (_(
+ "tcpspray6: TCP/IP bandwidth tester %s (%s)\n"), VERSION, "$Rev$");
+-	printf (_(" built %s on %s\n"), __DATE__, PACKAGE_BUILD_HOSTNAME);
+-	printf (_("Configured with: %s\n"), PACKAGE_CONFIGURE_INVOCATION);
+ 	puts (_("Written by Remi Denis-Courmont\n"));
+ 
+ 	printf (_("Copyright (C) %u-%u Remi Denis-Courmont\n"), 2005, 2007);
+--- a/src/traceroute.c
++++ b/src/traceroute.c
+@@ -1251,8 +1251,6 @@
+ {
+ 	printf (_(
+ "traceroute6: TCP & UDP IPv6 traceroute tool %s (%s)\n"), VERSION, "$Rev$");
+-	printf (_(" built %s on %s\n"), __DATE__, PACKAGE_BUILD_HOSTNAME);
+-	printf (_("Configured with: %s\n"), PACKAGE_CONFIGURE_INVOCATION);
+ 	puts (_("Written by Remi Denis-Courmont\n"));
+ 
+ 	printf (_("Copyright (C) %u-%u Remi Denis-Courmont\n"), 2005, 2007);
+--- a/rdnss/rdnssd.c
++++ b/rdnss/rdnssd.c
+@@ -738,8 +738,6 @@
+ {
+ 	printf (_("rdnssd: IPv6 Recursive DNS Server discovery Daemon %s (%s)\n"),
+ 	        VERSION, "$Rev$");
+-	printf (_(" built %s on %s\n"), __DATE__, PACKAGE_BUILD_HOSTNAME);
+-	printf (_("Configured with: %s\n"), PACKAGE_CONFIGURE_INVOCATION);
+ 	puts (_("Written by Pierre Ynard and Remi Denis-Courmont\n"));
+ 
+ 	printf (_("Copyright (C) %u-%u Pierre Ynard, Remi Denis-Courmont\n"),
